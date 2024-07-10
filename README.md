@@ -1,6 +1,6 @@
-## Team-24
+# Team-24
 
-# Team members:
+## Team members😍:
 - Liis from Estonia;
 - Mari Sarapuu from Estonia;
 - Nadežda G from Latvia;
