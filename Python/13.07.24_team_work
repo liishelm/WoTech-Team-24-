@@ -1,1 +1,20 @@
-Enter file contents here
+Task 1: Create a bar chart that shows the count of transactions for each unique value in the 'Gender' column (including NaN values). - **easy**
+
+```pyt
+import pandas as pd
+import matplotlib.pyplot as plt
+dataset = pd.read_csv('/content/transaction_dataset.csv')
+dataset['Gender'].value_counts(dropna=False).reset_index()
+df5 = dataset['Gender'].value_counts(dropna=False).reset_index()# to allso see NaN values
+df5.columns = ['Gender', 'Count']
+df5['Gender'] = df5['Gender'].astype(str)
+plt.bar(df5['Gender'], df5['Count'], color=('blue', 'green', 'orange'))
+plt.title('Custumers by gender')
+plt.xlabel('Gender')
+plt.ylabel('Count')
+plt.show()
+```
+
+
+
+
