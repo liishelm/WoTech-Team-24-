@@ -15,6 +15,21 @@ plt.ylabel('Count')
 plt.show()
 ```
 
+Task 2: Create a horizontal bar chart that shows the top 5 most frequent names in the DataFrame,based on the 'name' column. 
+(First, create a grouped DataFrame (name_df), then filter it using iloc, and finally create the visualization.) -medium
 
+``` pyt
+dataset['Name'].value_counts().reset_index()
+name_df = dataset['Name'].value_counts().reset_index().iloc[0:5]
+name_df.columns = ['Name','Count']
+plt.barh(name_df['Name'], name_df['Count'], color='green')
+plt.title('The top 5 most frequent names in the DataFrame')
+plt.xlabel('Count')
+plt.ylabel('Name')
+plt.gca().invert_yaxis()
+plt.show()
+```
 
+Task 3: Create a filtered DataFrame that includes Category == 'Clothing' and Gender == 'M'. How many rows are there in this filtered DataFrame? 
+Format the result as follows: The filtered DataFrame has XXXX rows. - hard
 
