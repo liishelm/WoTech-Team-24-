@@ -33,3 +33,8 @@ plt.show()
 Task 3: Create a filtered DataFrame that includes Category == 'Clothing' and Gender == 'M'. How many rows are there in this filtered DataFrame? 
 Format the result as follows: The filtered DataFrame has XXXX rows. - hard
 
+```pyt
+df6 = dataset[(dataset['Category'] == 'Clothing') & (dataset['Gender'] == 'M')]
+print(f"The filtered DataFrame has {df6.shape[0]} rows.")
+```
+
