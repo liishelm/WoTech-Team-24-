@@ -1,15 +1,14 @@
 Task 1: Create a bar chart that shows the count of transactions for each unique value in the 'Gender' column (including NaN values). - **easy**
 
-```pyt
+```python
 import pandas as pd
 import matplotlib.pyplot as plt
 dataset = pd.read_csv('/content/transaction_dataset.csv')
-dataset['Gender'].value_counts(dropna=False).reset_index()
-df5 = dataset['Gender'].value_counts(dropna=False).reset_index()# to allso see NaN values
-df5.columns = ['Gender', 'Count']
-df5['Gender'] = df5['Gender'].astype(str)
-plt.bar(df5['Gender'], df5['Count'], color=('blue', 'green', 'orange'))
-plt.title('Custumers by gender')
+df = dataset['Gender'].value_counts(dropna=False).reset_index()
+df.columns = ['Gender', 'Count']
+df['Gender'] = df['Gender'].astype(str)
+plt.bar(df['Gender'], df['Count'], color=('blue', 'green', 'orange'))
+plt.title('Count of Transactions by Gender')
 plt.xlabel('Gender')
 plt.ylabel('Count')
 plt.show()
@@ -18,23 +17,26 @@ plt.show()
 Task 2: Create a horizontal bar chart that shows the top 5 most frequent names in the DataFrame,based on the 'name' column. 
 (First, create a grouped DataFrame (name_df), then filter it using iloc, and finally create the visualization.) -medium
 
-``` pyt
+```python
 dataset['Name'].value_counts().reset_index()
-name_df = dataset['Name'].value_counts().reset_index().iloc[0:5]
+name_df = dataset['Name'].value_counts().reset_index()
 name_df.columns = ['Name','Count']
+name_df = name_df.iloc[:5]
 plt.barh(name_df['Name'], name_df['Count'], color='green')
-plt.title('The top 5 most frequent names in the DataFrame')
+plt.gca().invert_yaxis()
+plt.title('Top 5 Most Frequent Names')
 plt.xlabel('Count')
 plt.ylabel('Name')
-plt.gca().invert_yaxis()
 plt.show()
 ```
 
 Task 3: Create a filtered DataFrame that includes Category == 'Clothing' and Gender == 'M'. How many rows are there in this filtered DataFrame? 
 Format the result as follows: The filtered DataFrame has XXXX rows. - hard
 
-```pyt
-df6 = dataset[(dataset['Category'] == 'Clothing') & (dataset['Gender'] == 'M')]
-print(f"The filtered DataFrame has {df6.shape[0]} rows.")
+```python
+is_clothing = dataset['Category'] == 'Clothing'
+is_male = dataset['Gender'] == 'M'
+df2 = dataset[is_clothing & is_male]
+print(f"The filtered DataFrame has {df2.shape[0]} rows.")
 ```
 
