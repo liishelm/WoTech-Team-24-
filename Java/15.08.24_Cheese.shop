@@ -1,6 +1,7 @@
-#DTOs:
+DTOs:
 
 Cheese class:
+
 ```java
 package com.datorium.Datorium.API.DTOs;
 
@@ -11,6 +12,7 @@ public class Cheese {
 }
 ```
 UpdateCheeseDTO class:
+
 ``` java
 package com.datorium.Datorium.API.DTOs;
 
