@@ -1,1 +1,149 @@
-Enter file contents here
+#DTOs:
+
+Cheese class:
+```java
+package com.datorium.Datorium.API.DTOs;
+
+public class Cheese {
+    public String name;
+    public String type;
+
+}
+```
+UpdateCheeseDTO class:
+``` java
+package com.datorium.Datorium.API.DTOs;
+
+public class UpdateCheeseDTO {
+    public Cheese cheese;
+    public int cheeseIndex;
+}
+```
+Repo:
+
+CheeseRepo class:
+
+``` java
+package com.datorium.Datorium.API.Repo;
+
+import com.datorium.Datorium.API.DTOs.Cheese;
+
+import java.util.ArrayList;
+
+public class CheeseRepo {
+    private ArrayList<Cheese> cheeses = new ArrayList<>();
+    public int add (Cheese cheese) {
+        cheeses.add(cheese);
+        return cheeses.size();
+    }
+
+    public ArrayList<Cheese> get() {
+        return cheeses;
+    }
+
+    public Cheese update(int cheeseIndex, Cheese updateCheeseDTO){
+        var cheese = cheeses.get(cheeseIndex);
+        cheese.name = updateCheeseDTO.name;
+        cheese.type = updateCheeseDTO.type;
+        return cheese;
+    }
+}
+```
+Services:
+
+CheeseService class:
+
+``` java
+package com.datorium.Datorium.API.Services;
+
+import com.datorium.Datorium.API.DTOs.Cheese;
+import com.datorium.Datorium.API.Repo.CheeseRepo;
+
+import java.util.ArrayList;
+
+public class CheeseService {
+    private CheeseRepo cheeseRepo;
+    public CheeseService() {
+        cheeseRepo = new CheeseRepo();
+    }
+     public int add (Cheese cheese) {
+        return cheeseRepo.add(cheese);
+     }
+
+     public ArrayList<Cheese> get() {
+        return cheeseRepo.get();
+     }
+
+     public Cheese update(int cheeseIndex, Cheese updateCheeseDTO){
+        return cheeseRepo.update(cheeseIndex, updateCheeseDTO);
+     }
+
+}
+```
+Controllers:
+
+CheeseController class:
+
+```java
+
+package com.datorium.Datorium.API.Contollers;
+import com.datorium.Datorium.API.DTOs.Cheese;
+import com.datorium.Datorium.API.DTOs.UpdateCheeseDTO;
+import com.datorium.Datorium.API.Services.CheeseService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+
+@RestController
+@RequestMapping("/cheese")
+public class CheeseController {
+    private CheeseService cheeseService;
+    public CheeseController(){
+        cheeseService = new CheeseService();
+    }
+
+
+    @PostMapping("/add") //localhost:8080/test -> localhost:8080/user/test
+    public int add(@RequestBody Cheese cheese){
+        return cheeseService.add(cheese);
+    }
+
+    @GetMapping("/get")
+    public ArrayList<Cheese> get(){
+        return cheeseService.get();
+    }
+
+    @PostMapping("/update")
+    public Cheese update(@RequestBody UpdateCheeseDTO updateCheeseDTO){
+        return cheeseService.update(updateCheeseDTO.cheeseIndex, updateCheeseDTO.cheese);
+    }
+
+
+
+}
+```
+DatoriumApiApplication:
+```java
+
+package com.datorium.Datorium.API;
+
+import com.datorium.Datorium.API.DTOs.Cheese;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
+
+@SpringBootApplication
+@RestController
+@CrossOrigin
+public class DatoriumApiApplication {
+
+	public static void main(String[] args) {
+		System.out.println("asd");
+		SpringApplication.run(DatoriumApiApplication.class, args);
+	}
+
+
+}
+```
+
+
